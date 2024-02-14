@@ -1,0 +1,29 @@
+%import common.ESCAPED_STRING -> STRING
+%import common.WS
+%ignore WS
+
+eq : "="
+lt : "<"
+gt : ">"
+lte : "<="
+gte : ">="
+
+op:   eq
+    | lt
+    | gt
+    | lte
+    | gte
+
+node: STRING op STRING
+
+arg :   node 
+    |   predicate
+
+and : "AND"i "(" arg [("," arg)*] ")"
+or : "OR"i "(" arg [("," arg)*] ")"
+not : "NOT"i "(" arg ")"
+
+predicate   :   and
+            |   or
+            |   not
+            |   node

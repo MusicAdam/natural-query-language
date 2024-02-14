@@ -1,2 +1,2 @@
 from .nql import NqlParser
-from .es import EsConverter
+from .es import EsTransformer

@@ -2,28 +2,27 @@
 %import common.WS
 %ignore WS
 
-eq : "="
-lt : "<"
-gt : ">"
-lte : "<="
-gte : ">="
+EQ : "="
+LT : "<"
+GT : ">"
+LTE : "<="
+GTE : ">="
 
-op:   eq
-    | lt
-    | gt
-    | lte
-    | gte
+op:   EQ
+    | LT
+    | GT
+    | LTE
+    | GTE
 
-node: STRING op STRING
-
-arg :   node 
+arg :   comparison 
     |   predicate
 
-and : "AND"i "(" arg [("," arg)*] ")"
-or : "OR"i "(" arg [("," arg)*] ")"
-not : "NOT"i "(" arg ")"
+comparison: STRING op STRING
+fn_and : "AND"i "(" arg [("," arg)*] ")"
+fn_or : "OR"i "(" arg [("," arg)*] ")"
+fn_not : "NOT"i "(" arg ")"
 
-predicate   :   and
-            |   or
-            |   not
-            |   node
+predicate   :   fn_and
+            |   fn_or
+            |   fn_not
+            |   comparison
